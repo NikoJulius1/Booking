@@ -4,6 +4,7 @@ import requests
 import csv
 from io import StringIO
 
+
 app = Flask(__name__)
 
 # Connect to the SQLite database
