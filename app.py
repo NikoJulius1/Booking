@@ -94,4 +94,4 @@ def export_bookings_csv():
     return Response(output.getvalue(), mimetype='text/csv', headers={"Content-Disposition": "attachment;filename=bookings.csv"})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+    app.run()

@@ -19,5 +19,4 @@ RUN python reservationdatabase.py
 # Expose the port the Flask app runs on
 EXPOSE 5000
 
-# Define the command to run the application
-CMD ["python", "app.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]
