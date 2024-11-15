@@ -16,7 +16,7 @@ COPY . /app
 # Run the database initialization script
 RUN python reservationdatabase.py
 
-# Expose the port the Flask app runs on
+# Expose the port Gunicorn runs on
 EXPOSE 5000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
