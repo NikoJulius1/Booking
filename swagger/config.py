@@ -28,7 +28,7 @@ template = {
             "email": "contact@yourwebsite.com"
         }
     },
-    "host": "localhost:5000",  # Update with your service's hostname
+    "host": "localhost:5003",  # Update with your service's hostname
     "basePath": "/",  # Base path for the API
     "schemes": [
         "http"

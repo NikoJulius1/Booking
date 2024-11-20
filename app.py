@@ -5,6 +5,7 @@ import csv
 from io import StringIO
 from flask import Flask
 from swagger.config import init_swagger  # Adjust the path if needed
+from flasgger import swag_from
 
 app = Flask(__name__)
 swagger = init_swagger(app)
@@ -162,4 +163,4 @@ def export_bookings_csv():
     return Response(output.getvalue(), mimetype='text/csv', headers={"Content-Disposition": "attachment;filename=bookings.csv"})
 
 if __name__ == '__main__':
-    app.run()
+     app.run(port=5003)
