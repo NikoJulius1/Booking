@@ -5,15 +5,15 @@ swagger_config = {
     "headers": [],
     "specs": [
         {
-            "endpoint": 'apispec',
-            "route": '/apispec.json',
-            "rule_filter": lambda rule: True,  # Include all routes
+            "endpoint": 'apispec',  # Internal endpoint to serve API specs
+            "route": '/apispec.json',  # Route where the specs are served
+            "rule_filter": lambda rule: True,  # Include all routes by default
             "model_filter": lambda tag: True,  # Include all models
         }
     ],
-    "static_url_path": "/flasgger_static",
-    "swagger_ui": True,
-    "specs_route": "/docs"
+    "static_url_path": "/flasgger_static",  # Path for static assets (e.g., Swagger UI files)
+    "swagger_ui": True,  # Enable Swagger UI
+    "specs_route": "/docs"  # Route for the Swagger UI
 }
 
 # Template for API documentation
