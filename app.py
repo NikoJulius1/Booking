@@ -47,7 +47,7 @@ def isAvailable(roomnumber, checkin, checkout):
 
 # List all bookings
 @app.route('/bookings', methods=['GET'])
-@swag_from('list_bookings.yaml')
+@swag_from('swagger/list_bookings.yaml')
 def list_bookings():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -58,7 +58,7 @@ def list_bookings():
 
 # Create a new booking
 @app.route('/bookings', methods=['POST'])
-@swag_from('create_booking.yaml')
+@swag_from('swagger/create_booking.yaml')
 def create_booking():
     data = request.get_json()
     roomnumber = data.get('roomnumber')
@@ -86,7 +86,7 @@ def create_booking():
 # Export bookings in CSV format
 @app.route('/bookings/export/csv', methods=['GET'])
 @app.route('/bookings/export/csv', methods=['GET'])
-@swag_from('export_file.yaml')
+@swag_from('swagger/export_file.yaml')
 def export_bookings_csv():
     output = StringIO()
     writer = csv.writer(output)
