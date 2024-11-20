@@ -1,0 +1,9 @@
+tags:
+  - Bookings
+summary: Export bookings as CSV
+description: Download a CSV file containing all bookings in the system.
+responses:
+  200:
+    description: CSV file generated
+    content:
+      text/csv: {}

@@ -1,0 +1,37 @@
+tags:
+  - Bookings
+summary: Create a new booking
+description: Create a booking by providing room details, category, and dates.
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      required:
+        - roomnumber
+        - category
+        - checkin
+        - checkout
+      properties:
+        roomnumber:
+          type: integer
+          example: 101
+        category:
+          type: string
+          example: Deluxe
+        checkin:
+          type: string
+          format: date
+          example: 2024-11-25
+        checkout:
+          type: string
+          format: date
+          example: 2024-11-30
+responses:
+  201:
+    description: Booking created successfully.
+  400:
+    description: Invalid request. Missing or incorrect data.
+  409:
+    description: Room not available.
