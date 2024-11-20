@@ -3,9 +3,11 @@ from flask import Flask, request, jsonify, Response
 import requests
 import csv
 from io import StringIO
-
+from flask import Flask
+from swagger.config import init_swagger  # Adjust the path if needed
 
 app = Flask(__name__)
+swagger = init_swagger(app)
 
 # Connect to the SQLite database
 def get_db_connection():
