@@ -46,6 +46,30 @@ def isAvailable(roomnumber, checkin, checkout):
 
 # List all bookings
 @app.route('/bookings', methods=['GET'])
+@swag_from({
+    'tags': ['Bookings'],
+    'summary': 'List all bookings',
+    'description': 'Retrieve a list of all bookings in the database.',
+    'responses': {
+        200: {
+            'description': 'A list of bookings',
+            'schema': {
+                'type': 'array',
+                'items': {
+                    'type': 'object',
+                    'properties': {
+                        'id': {'type': 'integer', 'example': 1},
+                        'roomnumber': {'type': 'integer', 'example': 101},
+                        'category': {'type': 'string', 'example': 'Deluxe'},
+                        'isbooking': {'type': 'boolean', 'example': True},
+                        'checkin': {'type': 'string', 'format': 'date', 'example': '2024-11-25'},
+                        'checkout': {'type': 'string', 'format': 'date', 'example': '2024-11-30'}
+                    }
+                }
+            }
+        }
+    }
+})
 def list_bookings():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -56,6 +80,33 @@ def list_bookings():
 
 # Create a new booking
 @app.route('/bookings', methods=['POST'])
+@swag_from({
+    'tags': ['Bookings'],  # Tag grouping
+    'summary': 'Create a new booking',  # Short summary
+    'description': 'Create a booking by providing room details, category, and dates.',  # Detailed description
+    'parameters': [  # Define the expected parameters
+        {
+            'in': 'body',
+            'name': 'body',
+            'required': True,
+            'schema': {
+                'type': 'object',
+                'required': ['roomnumber', 'category', 'checkin', 'checkout'],  # Required fields
+                'properties': {
+                    'roomnumber': {'type': 'integer', 'example': 101},
+                    'category': {'type': 'string', 'example': 'Deluxe'},
+                    'checkin': {'type': 'string', 'format': 'date', 'example': '2024-11-25'},
+                    'checkout': {'type': 'string', 'format': 'date', 'example': '2024-11-30'}
+                }
+            }
+        }
+    ],
+    'responses': {  # Possible responses
+        201: {'description': 'Booking created successfully.'},
+        400: {'description': 'Invalid request. Missing or incorrect data.'},
+        409: {'description': 'Room not available.'}
+    }
+})
 def create_booking():
     data = request.get_json()
     roomnumber = data.get('roomnumber')
@@ -82,6 +133,20 @@ def create_booking():
 
 # Export bookings in CSV format
 @app.route('/bookings/export/csv', methods=['GET'])
+@app.route('/bookings/export/csv', methods=['GET'])
+@swag_from({
+    'tags': ['Bookings'],
+    'summary': 'Export bookings as CSV',
+    'description': 'Download a CSV file containing all bookings in the system.',
+    'responses': {
+        200: {
+            'description': 'CSV file generated',
+            'content': {
+                'text/csv': {}
+            }
+        }
+    }
+})
 def export_bookings_csv():
     output = StringIO()
     writer = csv.writer(output)
